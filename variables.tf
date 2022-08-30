@@ -96,3 +96,9 @@ variable "tags" {
   type        = map(string)
   description = "Extra tags to attach to the VPC resources"
 }
+
+variable "db_password" {
+  description = "RDS root user password"
+  type        = string
+  sensitive   = true
+}

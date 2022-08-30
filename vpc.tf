@@ -173,3 +173,8 @@ resource "aws_route_table_association" "public" {
   subnet_id      = aws_subnet.public[count.index].id
   route_table_id = aws_route_table.public.id
 }
+#endpoint 
+# resource "aws_vpc_endpoint" "endpoint" {
+#   vpc_id       = aws_vpc.vpc.id
+#   service_name = "com.amazonaws.ap-southeast-1.s3"
+# }

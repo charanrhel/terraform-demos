@@ -49,6 +49,14 @@ resource "aws_instance" "apache" {
   security_groups             = [aws_security_group.apache.id]
   associate_public_ip_address = true
   subnet_id                   = aws_subnet.public[0].id
+  user_data                   = file("scripts/userdata-apachce.sh")
+
+  key_name = aws_key_pair.publickey.id
+
+  lifecycle {
+    ignore_changes  = all
+    prevent_destroy = true
+  }
 
 
   tags = merge(
