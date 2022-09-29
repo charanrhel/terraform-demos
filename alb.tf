@@ -43,11 +43,11 @@ resource "aws_lb" "alb" {
 
   enable_deletion_protection = true
 
-#   access_logs {
-#     bucket  = aws_s3_bucket.lb_logs.bucket
-#     prefix  = "test-lb"
-#     enabled = true
-#   }
+  #   access_logs {
+  #     bucket  = aws_s3_bucket.lb_logs.bucket
+  #     prefix  = "test-lb"
+  #     enabled = true
+  #   }
 
   tags = merge(
     {
@@ -66,6 +66,16 @@ resource "aws_lb_target_group" "http" {
   port     = 80
   protocol = "HTTP"
   vpc_id   = aws_vpc.vpc.id
+
+  health_check {
+    path                = "/index.html"
+    port                = 80
+    healthy_threshold   = 6
+    unhealthy_threshold = 2
+    timeout             = 2
+    interval            = 5
+    matcher             = "200" # has to be HTTP 200 or fails
+  }
 }
 
 #listener 

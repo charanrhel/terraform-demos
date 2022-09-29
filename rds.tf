@@ -51,14 +51,26 @@ resource "aws_db_subnet_group" "data" {
   }
 }
 
-# resource "aws_db_instance" "mysql" {
-#   allocated_storage    = 10
-#   engine               = "mysql"
-#   engine_version       = "5.7"
-#   instance_class       = "db.t3.micro"
-#   name                 = "mydb"
-#   username             = "foo"
-#   password             = "foobarbaz"
-#   parameter_group_name = "default.mysql5.7"
-#   skip_final_snapshot  = true
-# }
+resource "aws_db_instance" "mysql" {
+  allocated_storage       = 50
+  engine                  = "mysql"
+  engine_version          = "5.7"
+  instance_class          = "db.t3.micro"
+  name                    = "mydb"
+  username                = "adminuserrds"
+  password                = var.db_password
+  parameter_group_name    = "default.mysql5.7"
+  skip_final_snapshot     = true
+  backup_retention_period = 7
+  maintenance_window      = "mon:10:10-mon:10:40"
+  backup_window           = "09:10-09:40"
+  multi_az                = true
+
+    tags ={
+      Name        = "jenkins"
+      Project     = var.project,
+      Environment = var.environment
+
+    }
+  
+}

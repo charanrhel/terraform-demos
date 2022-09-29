@@ -7,6 +7,18 @@ workspace
 remote s3 and dynamodb 
 modules, how to use remote module and local module 
 remote state 
+local_exec
+remote_exec
+null_resource 
+
+
+
+stop and start ec2 machine 
+ip address and zone 
+still not working 
+assign bastion elastic ip 
+
+
 
 
 
